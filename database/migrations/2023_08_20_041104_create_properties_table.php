@@ -28,6 +28,7 @@ class CreatePropertiesTable extends Migration
             $table->double('bathrooms');
             $table->string('comments')->nullable();
           
+            $table->softDeletes();
             $table->timestamps();
         });
     }
