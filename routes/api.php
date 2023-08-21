@@ -23,9 +23,8 @@ Route::get('/hola', function() {
     return response()->json(['name' => "Ramssés", 'lastname' => "Gomez"]);
 });
 
-
-Route::get('/properties', [PropertyController::class, 'list']);
-Route::get('/properties/:id', [PropertyController::class, 'show']);
-Route::post('/properties', [PropertyController::class, 'create']);
-Route::put('/properties/:id', [PropertyController::class, 'update']);
-Route::delete('/properties/:id', [PropertyController::class, 'delete']);
+Route::get('/properties', [PropertyController::class, 'index']);
+Route::get('/properties/{id}', [PropertyController::class, 'show']);
+Route::post('/properties', [PropertyController::class, 'store']);
+Route::put('/properties/{id}', [PropertyController::class, 'edit']);
+Route::delete('/properties/{id}', [PropertyController::class, 'destroy']);

@@ -8,32 +8,57 @@ use App\Property;
 
 class PropertyController extends Controller
 {
-    public function list() {
-        Log::info('Properties info requested.');
+    public function index()
+    {
+        Log::info("Properties info requested.");
 
-        return Property::all();
+        return response()->json(Property::all());
     }
     
-    public function show($id) {
-        Log::info('Property {id} requested.', ['id' => $id]);
+    public function show($id)
+    {
+        Log::info("Property $id info requested.");
 
-        return Property::find($id);
+        return response()->json(Property::find($id));
     }
     
-    public function create(Request $request) {
-        Log::info('Adding Property.');
+    public function store(Request $request)
+    {
+        Log::info("Adding Property.");
+
+        $validator = \Validator::make($request->post(), [
+            'name' => 'required|min:1|max:128',
+            'real_state_type' => 'required|in:house,department,land,commercial_ground',
+            'street' => 'required|min:1|max:128',
+            'external_number' => 'required|alpha_dash:ascii|min:1|max:12',
+            'internal_number' => 'nullable|alpha_dash:ascii|min:1|max:12',
+            'neighborhood' => 'required|min:1|max:128',
+            'city' => 'required|min:1|max:64',
+            'country' => 'required|alpha:2',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()->all()
+            ], 400);
+        }
+        
+        return $request->post();
 
         return Property::create($request::all());
     }
     
-    public function update($id, Request $request) {        
-        Log::info('Updating Property.');
+    public function edit($id, Request $request)
+    {        
+        Log::info("Updating Property.");
         
         return Property::update($request::all());
     }
     
-    public function delete($id) {
-        Log::info('Deleting Property.');
+    public function destroy($id)
+    {
+        Log::info("Deleting Property.");
 
         return Property::update($id, $request::all());
     }

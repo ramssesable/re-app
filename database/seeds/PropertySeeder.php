@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 use App\Property;
 
 class PropertySeeder extends Seeder
@@ -12,18 +13,26 @@ class PropertySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('properties')->insert([
-            'name'              => fake()->name(),
-            'real_state_type'   => array_rand(Property::$types),
-            'street'            => fake()->text(),
-            'external_number'   => Str::random(12),
-            'internal_number'   => Str::random(12),
-            'neighborhood'      => fake()->text(),
-            'city'              => Str::random(20),
-            'country'           => Str::random(2),// ISO
-            'rooms'             => rand(1, 10),
-            'bathrooms'         => rand(1, 10),
-            'comments'          => fake()->text(),
-        ]);
+        $fake = Faker::create();
+        $a = 0;
+
+        do {
+            DB::table('properties')->insert([
+                'name'              => $fake->name,
+                'real_state_type'   => Property::$types[rand(0, 3)],
+                'street'            => $fake->sentence(3),
+                'external_number'   => Str::random(12),
+                'internal_number'   => Str::random(12),
+                'neighborhood'      => $fake->sentence(1),
+                'city'              => Str::random(20),
+                'country'           => $fake->countryCode, // ISO
+                'rooms'             => rand(1, 10),
+                'bathrooms'         => rand(1, 10),
+                'comments'          => $fake->sentence,
+            ]);
+
+            $a++;
+        } while ($a <= 20);
+
     }
 }
