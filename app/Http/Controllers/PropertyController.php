@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Property;
+use Jekk0\laravel\Iso3166\Validation\Rules\Iso3166Alpha2;
 
 class PropertyController extends Controller
 {
@@ -34,7 +35,7 @@ class PropertyController extends Controller
             'internal_number' => 'nullable|alpha_dash:ascii|min:1|max:12',
             'neighborhood' => 'required|min:1|max:128',
             'city' => 'required|min:1|max:64',
-            'country' => 'required|alpha:2',
+            'country' => ['required', new Iso3166Alpha2()],
         ]);
 
         if ($validator->fails()) {
