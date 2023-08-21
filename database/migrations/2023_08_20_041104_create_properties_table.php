@@ -20,7 +20,7 @@ class CreatePropertiesTable extends Migration
             $table->enum('real_state_type', ['house', 'department', 'land', 'commercial_ground']);
             $table->string('street', 128);
             $table->string('external_number', 12); //Mask
-            $table->string('internal_number', 12); //Mask
+            $table->string('internal_number', 12)->nullable(); //Mask
             $table->string('neighborhood', 128);
             $table->string('city', 64);
             $table->string('country', 2); // ISO 3166-Alpha2
