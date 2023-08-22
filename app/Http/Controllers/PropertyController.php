@@ -93,7 +93,7 @@ class PropertyController extends Controller
         $property = Property::find($id);
 
         if ($property && $property->delete()) {
-            return response()->json('Property deleted successfully');
+            return response()->json($property);
         } else {
             return response()->json([
                 'status' => false,
