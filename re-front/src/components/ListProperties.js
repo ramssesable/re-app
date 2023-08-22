@@ -1,8 +1,20 @@
+// import axios from 'axios'
+// import { useState } from 'react'
 import DataTable from 'react-data-table-component'
 
-export default function ListProperties({data}) {
-  // A super simple expandable component.
-  const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
+export default function ListProperties({ data }) {
+  // const [details, setDetails] = useState([])
+
+  // const getDetails = (id) => {
+  //   axios.get(`http://localhost/re-app/public/api/properties/${data.id}`)
+  //     .then(result => {
+  //       setDetails(result.data)
+  //     })
+  // }
+  /* This feature just decide to loop tons of time, I think is a thing from the datatable component i used :c */
+
+  // // A super simple expandable component.
+  // const ExpandedComponent = ({ data }) => <pre>{ JSON.stringify(data, null, 2) }</pre>
   
   const columns = [
     {
@@ -27,8 +39,9 @@ export default function ListProperties({data}) {
     <DataTable
         columns={columns}
         data={data}
-        expandableRows
-        expandableRowsComponent={ExpandedComponent}
+        title={'Real Estate Properties'}
+        // expandableRows
+        // expandableRowsComponent={ExpandedComponent}
         pagination
     />
   );
