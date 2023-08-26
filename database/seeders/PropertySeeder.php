@@ -1,8 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-use App\Property;
+use App\Models\Property;
 
 class PropertySeeder extends Seeder
 {
@@ -17,14 +19,14 @@ class PropertySeeder extends Seeder
         $a = 0;
 
         do {
-            DB::table('properties')->insert([
+            Property::create([
                 'name'              => $fake->name,
                 'real_state_type'   => Property::$types[rand(0, 3)],
                 'street'            => $fake->sentence(3),
-                'external_number'   => Str::random(12),
-                'internal_number'   => Str::random(12),
+                'external_number'   => \Str::random(12),
+                'internal_number'   => \Str::random(12),
                 'neighborhood'      => $fake->sentence(1),
-                'city'              => Str::random(20),
+                'city'              => \Str::random(20),
                 'country'           => $fake->countryCode, // ISO
                 'rooms'             => rand(1, 10),
                 'bathrooms'         => rand(1, 10),

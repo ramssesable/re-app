@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules\Numeric;
-use App\Property;
+use App\Models\Property;
 use Jekk0\laravel\Iso3166\Validation\Rules\Iso3166Alpha2;
 
 class PropertyController extends Controller
