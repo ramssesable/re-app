@@ -9,7 +9,7 @@ export default function AddProperty({sendAlert}) {
     const {register, handleSubmit, reset, formState: { errors }} = useForm()
 
     const onSubmit = (data) => {
-        axios.post('http://localhost/re-app/public/api/properties', data)
+        axios.post(`${process.env.REACT_APP_API_URL}/properties`, data)
             .then(result => {
                 if (result.status === 200) {
                     reset()

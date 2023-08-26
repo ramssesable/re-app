@@ -6,7 +6,7 @@ export default function ListProperties({ data }) {
   // const [details, setDetails] = useState([])
 
   // const getDetails = (id) => {
-  //   axios.get(`http://localhost/re-app/public/api/properties/${data.id}`)
+  //   axios.get(`${process.env.REACT_APP_API_URL}/properties/${data.id}`)
   //     .then(result => {
   //       setDetails(result.data)
   //     })

@@ -10,7 +10,7 @@ function App() {
   const [show, setShow] = useState(false)
 
   const getData = () => {
-    axios.get('http://localhost/re-app/public/api/properties')
+    axios.get(`${process.env.REACT_APP_API_URL}/properties`)
       .then(result => {
         setData(result.data)
       })
