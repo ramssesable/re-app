@@ -8,6 +8,7 @@ import axios from 'axios'
 function App() {
   const [data, setData] = useState([])
   const [show, setShow] = useState(false)
+  const [alert, setAlert] = useState({})
 
   const getData = () => {
     axios.get(`${process.env.REACT_APP_API_URL}/properties`)
@@ -16,8 +17,17 @@ function App() {
       })
   }
 
-  const sendAlert = () => {
+  const sendAlert = (messageContent = false) => {
+    if (messageContent) {
+      setAlert({
+        type: messageContent.type,
+        title: messageContent.title,
+        message: messageContent.message
+      })
+    }
+
     setShow(true)
+    getData()
 
     setTimeout(() => {
       setShow(false)
@@ -42,12 +52,12 @@ function App() {
             </Col>
           </Row>
 
-          <Alert variant="primary" onClose={() => setShow(false)} dismissible show={show}>
-            <Alert.Heading>Property Added!</Alert.Heading>
-            <p>Record was successfully added</p>
+          <Alert variant={alert.type ?? 'success'} onClose={() => setShow(false)} dismissible show={show}>
+            <Alert.Heading>{alert.title ?? 'Property added!'}</Alert.Heading>
+            <p>{alert.message ?? 'Record was added successfully'}</p>
           </Alert>
 
-          <ListProperties data={data}/>
+          <ListProperties data={data} sendAlert={sendAlert}/>
         </Container>
         
       </header>
