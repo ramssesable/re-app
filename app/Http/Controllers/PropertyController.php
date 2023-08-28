@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules\Numeric;
-use App\Property;
+use App\Models\Property;
 use Jekk0\laravel\Iso3166\Validation\Rules\Iso3166Alpha2;
 
 class PropertyController extends Controller
@@ -28,7 +28,7 @@ class PropertyController extends Controller
     {
         Log::info("Adding Property.");
 
-        $custom_min = !in_array($request->post('real_state_type'), ['land', 'commercial_ground']);
+        $custom_min = in_array($request->post('real_state_type'), ['land', 'commercial_ground']) ? 0 : 1;
 
         $validator = \Validator::make($request->post(), [
             'name'              => 'required|min:1|max:128',

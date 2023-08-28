@@ -32,7 +32,7 @@ class PropertyTest extends TestCase
             ->assertJson([
                 "status"=> false,
                 "errors"=> [
-                    "The bathrooms must be at least 1."
+                    "The bathrooms field must be at least 1."
                 ]
             ]);
 
