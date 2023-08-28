@@ -28,7 +28,7 @@ class PropertyController extends Controller
     {
         Log::info("Adding Property.");
 
-        $custom_min = !in_array($request->post('real_state_type'), ['land', 'commercial_ground']);
+        $custom_min = in_array($request->post('real_state_type'), ['land', 'commercial_ground']) ? 0 : 1;
 
         $validator = \Validator::make($request->post(), [
             'name'              => 'required|min:1|max:128',
